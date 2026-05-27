@@ -7,6 +7,13 @@ class Property(models.Model):
         ('USED', 'Años de antigüedad'),
     ]
 
+    OPERATION_CHOICES = [
+        ('SALE', 'Venta'),
+        ('RENT', 'Alquiler'),
+    ]
+
+    title = models.CharField(max_length=255, default="")
+    operation_type = models.CharField(max_length=10, choices=OPERATION_CHOICES, default='SALE')
     description = models.TextField()
     total_area = models.DecimalField(max_digits=10, decimal_places=2)
     covered_area = models.DecimalField(max_digits=10, decimal_places=2)
@@ -24,11 +31,11 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.location} - {self.get_age_status_display()}"
+        return f"{self.title} ({self.get_operation_type_display()}) - {self.location}"
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='properties/')
 
     def __str__(self):
-        return f"Foto de {self.property.location}"
+        return f"Foto de {self.property.title}"
