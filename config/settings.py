@@ -28,7 +28,6 @@ DEBUG = 'RENDER' not in os.environ
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 
 if not DEBUG:
-    # Configuración para Producción (Render con Disco Persistente)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -37,7 +36,6 @@ if not DEBUG:
     }
     MEDIA_ROOT = '/data/media'
 else:
-    # Configuración para Desarrollo Local
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -48,8 +46,6 @@ else:
 
 MEDIA_URL = '/media/'
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -96,8 +92,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -107,8 +101,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -126,8 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -138,8 +128,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
