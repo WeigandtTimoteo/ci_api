@@ -1,4 +1,7 @@
 from django.db import models
+import os
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 class Property(models.Model):
     STAGE_CHOICES = [
@@ -39,3 +42,9 @@ class PropertyImage(models.Model):
 
     def __str__(self):
         return f"Foto de {self.property.title}"
+
+@receiver(post_delete, sender=PropertyImage)
+def ordenar_borrado_imagen(sender, instance, **kwargs):
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
